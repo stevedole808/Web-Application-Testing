@@ -1,9 +1,28 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { render, fireEvent } from "@testing-library/react";
+import App from "./App";
+import Dashboard from "./components/Dashboard";
+import Display from "./components/Display";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test("App renders without crashing", () => {
+  render(<App />);
 });
+
+test("strikes are rendered", () => {
+  const container = render(<Dashboard/>)
+  container.queryByText("Strikes")
+})
+
+test("balls are rendered", () => {
+  const {queryByText} = render(<Dashboard/>)
+  queryByText("balls")
+})
+
+test("Hits are rendered", () => {
+  const container = render(<Dashboard/>)
+  container.queryByText("/HITS/i")
+})
+
+test("Display is rendered", () => {
+  const {getByTestId} = render(<Display/>)
+  getByTestId("Baller")
+})
